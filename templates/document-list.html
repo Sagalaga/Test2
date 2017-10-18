@@ -1,0 +1,31 @@
+<ion-view title="'Dokument'" right-buttons="logoutBtn">
+
+    <div class="bar bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input id="searchKey" type="search" placeholder="Sök" ng-model="searchKey" autocorrect="off" >
+        </label>
+    </div>
+    
+
+    <ion-content has-header="true" has-subheader="true" class="document-content" on-refresh="onRefresh()">
+        <ion-refresher></ion-refresher>
+
+        <section ng-repeat="(key,categoryObject) in categories" class="document-section">
+            <header class="document-header"><h2><i class="icon icon-{{categoryObject.data.category.slug}}"></i>{{categoryObject.data.category.title}}</h2></header>
+
+            <ion-list class="document-list">
+                <div ng-repeat="post in categoryObject.data.posts | filter:searchKey" ng-class="{favorite: checkFav(post.id)}" class="item {{post.categories[0].slug}">
+                    <a class="item-content" href="#/document/{{post.id}}/{{post.categories[0].slug}}"><h3>{{post.title}}</h3></a>
+                    <div class="star" id="star-{{post.id}}" class="" ng-model="star" ng-click="addFav(post)"><i class="icon"></i></div>
+                </div>
+            </ion-list>
+        </section>
+
+        <div class="footer">
+          <div class="title">&nbsp;</div>
+        </div>
+        
+    </ion-content>
+
+</ion-view>

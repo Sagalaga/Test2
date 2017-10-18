@@ -1,0 +1,91 @@
+<ion-view title="post.title" right-buttons="rightButtons">
+
+  <ion-side-menus>
+  
+
+        <ion-pane ion-side-menu-content>
+
+          <ion-content has-header="true" overflow-scroll="true" class="document-content">
+
+     
+                <div ng-repeat="(ch_key, chapter) in post.acf.post_content" class="chapter">
+
+                      <div id="chapter-{{ch_key}}" class="bar bar-header chapter-header">
+                        <h2>{{chapter.chapter_header}}</h2>
+                      </div>
+
+                      <div class="chapter-content-container">
+
+                          <div ng-repeat="content in chapter.chapter_content" class="chapter-item">
+                          
+                            <div ng-if="content.acf_fc_layout == 'image'" class="image">
+                              <img ng-src="{{content.chapter_image}}">
+                            </div>
+
+                            <div ng-if="content.acf_fc_layout == 'subheader'" class="subheader">
+                              <h3>{{content.chapter_subheader}}</h3>
+                            </div>
+                            
+                            <div ng-if="content.acf_fc_layout == 'text'" ng-bind-html="content.chapter_text" class="text"></div>
+
+                            <div ng-if="content.acf_fc_layout == 'table'" class="table">
+                              <ul ng-repeat="row in content.table_content" class="table-row">
+                                <li ng-repeat="(key, cell) in row.table_row" class="table-cell cell{{key}}">{{cell.table_cell}}</li>
+                              </ul>
+                            </div>
+
+                            <div ng-if="content.acf_fc_layout == 'pdf'" class="pdf">
+                            	<span class="button" ng-click="openPDF(content.chapter_pdf)">Ladda ner PDF</span>
+                            </div>
+
+                          </div>
+
+                      </div>
+ 
+                </div>
+            
+            <div class="footer">
+              <div class="title">&nbsp;</div>
+            </div>
+
+          </ion-content>
+
+        </ion-pane>
+  
+        
+        <ion-side-menu side="right" class="document-content">
+          <div class="leaf-top-right"></div>
+          
+          <ion-content has-header="true">
+
+
+      			<section class="document-section">
+	                <header class="document-header"><h2>{{post.title}}</h2></header>
+
+	                <ion-list class="document-list">
+	                    <ion-item ng-repeat="(ch_key, chapter) in post.acf.post_content" type="item-text-wrap" ng-href="#/document/{{post.id}}/{{post.categories[0].slug}}#chapter-{{ch_key}}" ng-click="toggleRightMenu()">
+	                      <h3>{{chapter.chapter_header}}</h3>
+	                  </ion-item>
+	                </ion-list>
+	            </section>
+
+              <section class="document-section">
+	                <header class="document-header"><h2><i class="icon ion-leaf"></i>{{post.categories[0].title}}</h2></header>
+
+	                <ion-list class="document-list">
+	                    <ion-item ng-repeat="related_post in related_posts" ng-class="{ active : related_post.id == post.id }" type="item-text-wrap" href="#/document/{{related_post.id}}/{{post.categories[0].slug}}">
+	                      <h3>{{related_post.title}}</h3>
+	                  </ion-item>
+	                </ion-list>
+	            </section>
+
+              <div class="footer">
+                <div class="title">&nbsp;</div>
+              </div>
+
+          </ion-content>
+
+        </ion-side-menu>
+        
+  </ion-side-menus>
+</ion-view>

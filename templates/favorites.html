@@ -1,0 +1,58 @@
+<ion-view title="'Favoriter'">
+
+    <div class="bar bar-subheader item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input id="searchKey" type="search" placeholder="Search" ng-model="searchKey" autocorrect="off" >
+            <!--<button class="button button-clear" ng-click="clearSearch()">X</button>-->
+        </label>
+        <!--<button class="button button-clear" ng-click="search()">Search</button>-->
+    </div>
+    
+
+    <ion-content has-header="true" has-subheader="true" class="document-content">
+       
+        <section class="document-section">
+            <header class="document-header"><h2><i class="icon ion-leaf"></i>Smakinställningar</h2></header>
+            <ion-list class="document-list">
+                <div ng-repeat="post in favList | filter: searchKey | filter: catFilterSmakinstallningar" ng-class="{favorite: checkFav(post.id)}" class="item {{post.categories[0].slug}">
+                    <a class="item-content" href="#/document/{{post.id}}/{{post.categories[0].slug}}"><h3>{{post.title}}</h3></a>
+                    <div class="star" id="star-{{post.id}}" class="" ng-model="star" ng-click="removeFav(post.id)"><i class="icon"></i></div>
+                </div>
+            </ion-list>
+        </section>
+        <section class="document-section">
+            <header class="document-header"><h2><i class="icon icon-manualer"></i>Manualer</h2></header>
+            <ion-list class="document-list">
+                <div ng-repeat="post in favList | filter: searchKey | filter: catFilterManualer" ng-class="{favorite: checkFav(post.id)}" class="item {{post.categories[0].slug}">
+                    <a class="item-content" href="#/document/{{post.id}}/{{post.categories[0].slug}}"><h3>{{post.title}}</h3></a>
+                    <div class="star" id="star-{{post.id}}" class="" ng-model="star" ng-click="removeFav(post.id)"><i class="icon"></i></div>
+                </div>
+            </ion-list>
+        </section>
+        <section class="document-section">
+            <header class="document-header"><h2><i class="icon icon-produktblad"></i>Produktblad</h2></header>
+            <ion-list class="document-list">
+                <div ng-repeat="post in favList | filter: searchKey | filter: catFilterProduktblad" ng-class="{favorite: checkFav(post.id)}" class="item {{post.categories[0].slug}">
+                    <a class="item-content" href="#/document/{{post.id}}/{{post.categories[0].slug}}"><h3>{{post.title}}</h3></a>
+                    <div class="star" id="star-{{post.id}}" class="" ng-model="star" ng-click="removeFav(post.id)"><i class="icon"></i></div>
+                </div>
+            </ion-list>
+        </section>
+        <section class="document-section">
+            <header class="document-header"><h2><i class="icon icon-rengoringsrutiner"></i>Rengöringsrutiner</h2></header>
+            <ion-list class="document-list">
+                <div ng-repeat="post in favList | filter: searchKey | filter: catFilterRengoringsrutiner" ng-class="{favorite: checkFav(post.id)}" class="item {{post.categories[0].slug}">
+                    <a class="item-content" href="#/document/{{post.id}}/{{post.categories[0].slug}}"><h3>{{post.title}}</h3></a>
+                    <div class="star" id="star-{{post.id}}" class="" ng-model="star" ng-click="removeFav(post.id)"><i class="icon"></i></div>
+                </div>
+            </ion-list>
+        </section>
+
+        <div class="footer">
+          <div class="title">&nbsp;</div>
+        </div>
+        
+    </ion-content>
+
+</ion-view>

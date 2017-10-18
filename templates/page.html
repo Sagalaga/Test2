@@ -1,0 +1,13 @@
+<ion-view title="page.title" class="page-view">
+
+    <ion-content has-header="true" class="document-content">
+		
+		<div ng-if="page.thumbnail" class="featured-image">
+			<img ng-src="{{page.thumbnail_images.wp_app_full.url}}">
+		</div>
+
+		<div class="page-content" ng-bind-html="page.content"></div>
+
+    </ion-content>
+
+</ion-view>
